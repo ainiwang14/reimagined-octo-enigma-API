@@ -10,7 +10,30 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-:root {
+
+
+
+ /*SCROLLABLE MENU*/
+ .scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+  color: white
+}
+
+.caret {
+  color:white
+}
+.bold {
+  color: white;
+}
+
+.dropdown-toggle {
+  color: white;
+}
+
+/*////////PRE-MADE BOOSTRAP CONTENT////////*/
+ :root {
   --blue: #007bff;
   --indigo: #6610f2;
   --purple: #6f42c1;
