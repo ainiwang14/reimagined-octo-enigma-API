@@ -1,5 +1,7 @@
 $(document).ready(function(){
     $(".dropdown-item").on("click", function(){
+        var stateName = $(this).text()
+        $(".dropdown-toggle").text(stateName)
         $(".results").empty()
 
     var stateCode = $(this).attr("value")
@@ -42,7 +44,7 @@ $(document).ready(function(){
                 fees.text("") 
             }
             parkName.text(response.data[i].fullName)
-            info.text(response.data[i].description)
+            info.text(response.data[i].designation)
             resultDiv.append(parkName, info, fees, parkImg)
             $(".results").append(resultDiv)
             console.log(response.data[i].fullName)
