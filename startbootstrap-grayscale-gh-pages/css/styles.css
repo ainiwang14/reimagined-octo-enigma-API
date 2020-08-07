@@ -52,8 +52,6 @@
   padding-bottom: 20px;
 }
 /*//////////// BLAKEQUAKE-STYLES-ABOVE-THIS ROW ////////////*/
-
-
 /*////////PRE-MADE BOOSTRAP CONTENT////////*/
  :root {
   --blue: #007bff;
@@ -240,6 +238,12 @@ pre {
 
 figure {
   margin: 0 0 1rem;
+}
+
+#map {
+  display: none;
+  height: 600px;
+  width: 80%;
 }
 
 img {
