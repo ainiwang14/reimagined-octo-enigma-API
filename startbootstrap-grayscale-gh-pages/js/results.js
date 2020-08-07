@@ -26,7 +26,7 @@ $(document).ready(function(){
         var long5 = response.data[5].longitude
         console.log(response)
         for (var i = 0; i < 5; i++){
-            var resultDiv = $("<div>")
+            var resultDiv = $("<button>")
             var parkName = $("<p>")
             var info = $("<p>")
             var fees = $("<p>")
