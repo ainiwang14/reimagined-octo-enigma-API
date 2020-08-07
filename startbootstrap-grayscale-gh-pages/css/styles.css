@@ -13,8 +13,8 @@
 
 
 
- /*SCROLLABLE MENU*/
- .scrollable-menu {
+  /*SCROLLABLE MENU*/
+  .scrollable-menu {
   height: auto;
   max-height: 200px;
   overflow-x: hidden;
@@ -31,6 +31,41 @@
 .dropdown-toggle {
   color: white;
 }
+/*/////////// TIM ABOVE / BLAKE BELOW //////////////*/
+
+
+.resultBoxes {
+  padding-bottom: 233px;
+}
+
+.bi-droplet {
+  height: 1.5rem;
+  float: right;
+}
+
+.bi-globe {
+  height: 1.5rem;
+  float: right;
+}
+
+.bi-brightness-high {
+  height: 1.5rem;
+  float: right;
+}
+
+.bi-cloud {
+  height: 1.5rem;
+  float: right;
+}
+
+.bi-flower1 {
+  height: 1.5rem;
+  float: right;
+}
+
+/*//////////// BLAKEQUAKE-STYLES-ABOVE-THIS ROW ////////////*/
+
+
 
 /*////////PRE-MADE BOOSTRAP CONTENT////////*/
  :root {
