@@ -28,6 +28,13 @@ $(document).ready(function(){
             var parkName = $("<p>")
             var info = $("<p>")
             var fees = $("<p>")
+            var parkImg = $("<img>")
+            if (response.data[i].images[0]) {
+                parkImg.attr("src", response.data[i].images[0].url)
+                parkImg.attr("alt", response.data[i].images[0].altText)
+                parkImg.attr("style", "height: 150px;  width: 150px")
+            }
+
             if (response.data[i].entranceFees[i]) {
                 fees.text(response.data[i].entranceFees[i].cost)
             }
@@ -36,7 +43,7 @@ $(document).ready(function(){
             }
             parkName.text(response.data[i].fullName)
             info.text(response.data[i].description)
-            resultDiv.append(parkName, info, fees)
+            resultDiv.append(parkName, info, fees, parkImg)
             $(".results").append(resultDiv)
             console.log(response.data[i].fullName)
         }
