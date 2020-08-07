@@ -12,20 +12,13 @@ $(document).ready(function(){
         url: queryUrl,
         method: "GET"
     }).then(function(response){
-        var lat0 = response.data[0].latitude
-        var long0 = response.data[0].longitude
-        var lat1 = response.data[1].latitude
-        var long1 = response.data[1].longitude
-        var lat2 = response.data[2].latitude
-        var long2 = response.data[2].longitude
-        var lat3 = response.data[3].latitude
-        var long3 = response.data[3].longitude
-        var lat4 = response.data[4].latitude
-        var long4 = response.data[4].longitude
-        var lat5 = response.data[5].latitude
-        var long5 = response.data[5].longitude
+
         console.log(response)
+
         for (var i = 0; i < 5; i++) {
+            var long = response.data[i].longitude
+            var lat = response.data[i].latitude
+            console.log(long, lat)
             var parkName = $("<p>")
             var info = $("<p>")
             var fees = $("<p>")
