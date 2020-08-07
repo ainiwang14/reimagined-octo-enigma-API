@@ -1,4 +1,8 @@
 $(document).ready(function(){
+    $(document).on("click", ".infoBtn", function(){
+        console.log("hello")
+        
+    })
     var stateArray = [{ initials: 'AL', state: 'Alabama' }, { initials: 'AZ', state: 'Arizona' }, {initials: 'AK', state: 'Alaska'}, {initials: 'AZ', state: 'Arizona'}, {initials: 'AR', state: 'Arkansas'}, {initials: 'CA', state: 'California'}, {initials: 'CO', state: 'Colorado'}, {initials: 'CT', state: 'Connecticut'}, {initials: 'DE', state: 'Delaware'}, {initials: 'FL', state: 'Florida'}, {initials: 'GA', state: 'Georgia'}, {initials: 'HI', state: 'Hawaii'}, {initials: 'ID', state: 'Idaho'}, {initials: 'IL', state: 'Illinois'}, {initials: 'IN', state: 'Indiana'}, {initials: 'IA', state: 'Iowa'}, {initials: 'KS', state: 'Kansas'}, {initials: 'KY', state: 'Kentucky'}, {initials: 'LA', state: 'Louisiana'}, {initials: 'ME', state: 'Maine'}, {initials: 'MD', state: 'Maryland'}, {initials: 'MA', state: 'Massachusetts'}, {initials: 'ME', state: 'Maine'}, {intials: 'MI', state: 'Michigan'}, {initials: 'MN', state: 'Minnesota'}, {initials: 'MS', state: 'Mississippi'}, {initials: 'MO', state: 'Missouri'}, {intials: 'MT', state: 'Montana'}, {initials: 'NE', state: 'Nebraska'}, {initials: 'NV', state: 'Nevada'}, {initals: 'NH', state: 'New Hampshire'}, {initals: 'NJ', state: 'New Jersey'}, {initials: 'NM', state: 'New Mexico'}, {initials: 'NY', state: 'New York'}, {initials: 'NC', state: 'North Carolina'}, {initials: 'ND', state: 'North Dakota'}, {initials: 'OH', state: 'Ohio'}, {initials: 'OK', state: 'Oklahoma'}, {initials: 'OR', state: 'Oregon'}, {initials: 'PA', state: 'Pennsylvania'}, {initials: 'RI', state: 'Rhode Island'}, {initials: 'SC', state: 'South Carolina'}, {initials: 'SD', state: 'South Dakota'}, {initials: 'TN', state: 'Tennessee'}, {initials: 'TX', state: 'Texas'}, {initials: 'UT', state: 'Utah'}, {initials: 'VT', state: 'Vermont'}, {initials: 'VA', state: 'Virginia'}, {initials: 'WA', state: 'Washington'}, {initials: 'WV', state: 'West Virginia'}, {initials: 'WI', state: 'Wisconsin'}, {initials: 'WY', state: 'Wyoming'}];
     for (var i = 0; i < stateArray.length; i++) {
 
@@ -31,10 +35,15 @@ $(document).ready(function(){
         url: npsUrl,
         method: "GET"
     }).then(function(response){
+        
+        var map;
 
-        var address = response.data[0].addresses[0].line3
-        var city = response.data[0].addresses[0].city
-        var state = response.data[0].addresses[0].stateCode
+
+        for (var i = 0; i < 3; i++) {
+
+        var address = response.data[i].addresses[0].line3 + response.data[i].addresses[0].line2 + response.data[i].addresses[0].line1
+        var city = response.data[i].addresses[0].city
+        var state = response.data[i].addresses[0].stateCode
         var geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "," + city + "," + state + "&key=AIzaSyCLjaOmTbNl8M0ewJ5amY9cm6rytBGUVZM"
 
         $.ajax({
@@ -42,36 +51,49 @@ $(document).ready(function(){
             method: "GET"
         }).then(function(addResponse){
             console.log(addResponse)
-            if ($(this).attr("value"))
 
             function initMap() {
+                console.log("HELLOE")
                  map = new google.maps.Map(document.getElementById("map"), {
-                    center: {
-                        lat: 0,
-                        long: 0
-                    },
+                    center: new google.maps.LatLng(addResponse.results[0].geometry.location.lat,addResponse.results[0].geometry.location.lng),
                     zoom: 6
                 })
+                getParks();
                 }
-                // function getRestaurants(location) {
-                //     var pyromont = new google.maps.LatLng(lat,long);
-                //     var request = {
-                //         location: pyromont,
-                //         radius: "1500",
-                //         type: ["park"]
-                //     };
-                //     service = new google.maps.places.PlacesService(map);
-                //     service.nearbySearch(request, callback)
-                // }
+                function getParks() {
+                    var pyromont = new google.maps.LatLng(addResponse.results[0].geometry.location.lat,addResponse.results[0].geometry.location.lng);
+                    var request = {
+                        location: pyromont,
+                        radius: "20000000"
+                    };
+                        var content = '<h3>' + addResponse.results[0].name + '</h3>' + '<h4>' + addResponse.results[0].vicinity + '</h4>'
+                        var marker = new google.maps.Marker({
+                            position: addResponse.results[0].geometry.location,
+                            map: map,
+                            title: addResponse.results[0].name
+                        });
+    
+                        var infoWindow = new google.maps.InfoWindow({
+                            content: content
+                        })
+    
+                        marker.setMap(map);
+                        bindInfoWindow(marker, map, infoWindow, content);
+                    
+                    // service = new google.maps.places.PlacesService(map);
+                    // service.nearbySearch(request, callback)
+                    // console.log(service)
+                }
     
                 function callback(results, status){
+                    console.log("HE")
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
                         for (var i = 0; i < results.length; i++) {
                             var content = '<h3>' + results[i].name + '</h3>' + '<h4>' + results[i].vicinity + '</h4>'
                             var marker = new google.maps.Marker({
                                 position: results[i].geometry.location,
                                 map: map,
-                                tittle: results[i].name
+                                title: results[i].name
                             });
         
                             var infoWindow = new google.maps.InfoWindow({
@@ -93,21 +115,25 @@ $(document).ready(function(){
                 }
             initMap()
         })
+    }
         
 
         console.log(response)
 
-        for (var i = 0; i < 5; i++) {
+        for (var i = 0; i < 4; i++) {
             var resultDiv = $("<div>")
             var parkName = $("<p>")
             var info = $("<p>")
             var fees = $("<p>")
             var parkImg = $("<img>")
+            var resultBtn = $("<button>")
+            resultBtn.text("More Info")
+            resultBtn.attr("class", "infoBtn")
             if (response.data[i].images[0]) {
                 parkImg.attr("src", response.data[i].images[0].url)
                 parkImg.attr("alt", response.data[i].images[0].altText)
-                parkImg.attr("style", "height: 150px;  width: 150px")
-                // parkImg.attr("style", "float: right;")
+                parkImg.attr("style", "height: 150px;  width: 150px;")
+                
                 }
 
             if (response.data[i].entranceFees[0]) {
@@ -118,9 +144,10 @@ $(document).ready(function(){
                 }
             parkName.text(response.data[i].fullName)
             info.text(response.data[i].description)
-            resultDiv.append(parkName, info, fees, parkImg)
+            resultDiv.append(parkName, info, fees, parkImg, resultBtn)
             $("#result" + i).html(resultDiv)
         }
+       
     })
 })
    
