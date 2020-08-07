@@ -43,7 +43,6 @@ $(document).ready(function(){
         }).then(function(addResponse){
             console.log(addResponse)
             if ($(this).attr("value"))
-            // location = new google.maps.LatLng(addResponse.results[0].geometry.location.lat,addResponse.results[0].geometry.location.long)
 
             function initMap() {
                  map = new google.maps.Map(document.getElementById("map"), {
@@ -99,6 +98,7 @@ $(document).ready(function(){
         console.log(response)
 
         for (var i = 0; i < 5; i++) {
+            var resultDiv = $("<div>")
             var parkName = $("<p>")
             var info = $("<p>")
             var fees = $("<p>")
@@ -107,17 +107,19 @@ $(document).ready(function(){
                 parkImg.attr("src", response.data[i].images[0].url)
                 parkImg.attr("alt", response.data[i].images[0].altText)
                 parkImg.attr("style", "height: 150px;  width: 150px")
+                // parkImg.attr("style", "float: right;")
                 }
 
             if (response.data[i].entranceFees[0]) {
-                fees.text(response.data[i].entranceFees[0].cost)
+                fees.text("$" + response.data[i].entranceFees[0].cost)
                 }
             else {
-                fees.text("") 
+                fees.text("$0.000") 
                 }
             parkName.text(response.data[i].fullName)
-            info.text(response.data[i].designation)
-            $("#result" + i).append(parkName, info, fees, parkImg)
+            info.text(response.data[i].description)
+            resultDiv.append(parkName, info, fees, parkImg)
+            $("#result" + i).html(resultDiv)
         }
     })
 })
