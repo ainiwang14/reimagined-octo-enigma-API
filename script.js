@@ -31,7 +31,7 @@ $.ajax({
                     lat: lat ,
                     lng: long
                 },
-                zoom: 9
+                zoom: 15
         })
         getRestaurants(location);
         
@@ -52,7 +52,7 @@ $.ajax({
         function callback(results, status){
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 for (var i = 0; i < results.length; i++) {
-                    var content = '<h3>${place.name}</h3><h4>{place.vicinity}</h4>'
+                    var content = '<h3>' + results[i].name + '</h3>' + '<h4>' + results[i].vicinity + '</h4>'
                     var marker = new google.maps.Marker({
                         position: results[i].geometry.location,
                         map: map,
@@ -63,14 +63,15 @@ $.ajax({
                         content: content
                     })
 
-                    bindInfoWindow(marker, map, infoWindow, content);
                     marker.setMap(map);
+                    bindInfoWindow(marker, map, infoWindow, content);
+
 
                 }
             }
         }
         function bindInfoWindow(marker, map, infoWindow, html) {
-            marker.addEventListener("click", function(){
+            marker.addListener("click", function(){
                 infoWindow.setContent(html)
                 infoWindow.open(map, this)
             })
