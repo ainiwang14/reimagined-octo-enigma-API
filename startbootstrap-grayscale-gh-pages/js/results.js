@@ -80,7 +80,7 @@ $(document).ready(function(){
             resultBtn.attr("class", "infoBtn")
             const zipcode = response.data[i].addresses[0].postalCode
             resultBtn.attr("id", `${zipcode}`)
-            resultBtn.click((event) => handleInfoClick(event.currentTarget.id))
+            resultBtn.click((event) => zipToGeo(event.currentTarget.id))
             if (response.data[i].images[0]) {
                 parkImg.attr("src", response.data[i].images[0].url)
                 parkImg.attr("alt", response.data[i].images[0].altText)
@@ -108,14 +108,34 @@ function zipToGeo(zipcode) {
     }).then(response => {
         const latitude = response.records[0].fields.latitude;
         const longitude = response.records[0].fields.longitude;
-        return {latitude, longitude}
+        const geoLocation = {latitude, longitude}
+        getSunData(geoLocation)
+        getWeatherData(geoLocation)
     })
 }
 
-function handleInfoClick(zipcode) {
-    zipToGeo(zipcode)
+function getSunData(geoLocation) {
+    const { latitude, longitude } = geoLocation;
+    const url = `https://api.sunrise-sunset.org/json?lat=${latitude}&lng=${longitude}`
+
+    $.ajax({
+        url,
+        method: "GET"
+    }).then(response => {
+        console.log(response, "sunData")
+    })
 }
 
+function getWeatherData(geoLocation) {
+    const { latitude, longitude } = geoLocation;
+    const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=927924e4c73455c7286d71a6b1b45a4c`
 
+    $.ajax({
+        url,
+        method: "GET"
+    }).then(response => {
+        console.log(response, "weather")
+    })
+}
 
 })
