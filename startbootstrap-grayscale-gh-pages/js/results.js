@@ -17,7 +17,7 @@ $(document).ready(function(){
             "easeInOutExpo"
         );
 
-  
+
 
         event.preventDefault();
         $(".results").empty()
@@ -31,68 +31,69 @@ $(document).ready(function(){
         url: npsUrl,
         method: "GET"
     }).then(function(response){
+        console.log(response);
 
         var address = response.data[0].addresses[0].line3
         var city = response.data[0].addresses[0].city
         var state = response.data[0].addresses[0].stateCode
         var geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + address + "," + city + "," + state + "&key=AIzaSyCLjaOmTbNl8M0ewJ5amY9cm6rytBGUVZM"
 
-        $.ajax({
-            url: geocodingUrl,
-            method: "GET"
-        }).then(function(addResponse){
-            console.log(addResponse)
-            if ($(this).attr("value"))
+        // $.ajax({
+        //     url: geocodingUrl,
+        //     method: "GET"
+        // }).then(function(addResponse){
+        //     console.log(addResponse)
+        //     if ($(this).attr("value"))
 
-            function initMap() {
-                 map = new google.maps.Map(document.getElementById("map"), {
-                    center: {
-                        lat: 0,
-                        long: 0
-                    },
-                    zoom: 6
-                })
-                }
-                // function getRestaurants(location) {
-                //     var pyromont = new google.maps.LatLng(lat,long);
-                //     var request = {
-                //         location: pyromont,
-                //         radius: "1500",
-                //         type: ["park"]
-                //     };
-                //     service = new google.maps.places.PlacesService(map);
-                //     service.nearbySearch(request, callback)
-                // }
+        //     function initMap() {
+        //         map = new google.maps.Map(document.getElementById("map"), {
+        //             center: {
+        //                 lat: 0,
+        //                 long: 0
+        //             },
+        //             zoom: 6
+        //         })
+        //         }
+        //         // function getRestaurants(location) {
+        //         //     var pyromont = new google.maps.LatLng(lat,long);
+        //         //     var request = {
+        //         //         location: pyromont,
+        //         //         radius: "1500",
+        //         //         type: ["park"]
+        //         //     };
+        //         //     service = new google.maps.places.PlacesService(map);
+        //         //     service.nearbySearch(request, callback)
+        //         // }
     
-                function callback(results, status){
-                    if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        for (var i = 0; i < results.length; i++) {
-                            var content = '<h3>' + results[i].name + '</h3>' + '<h4>' + results[i].vicinity + '</h4>'
-                            var marker = new google.maps.Marker({
-                                position: results[i].geometry.location,
-                                map: map,
-                                tittle: results[i].name
-                            });
+        //         function callback(results, status){
+        //             if (status == google.maps.places.PlacesServiceStatus.OK) {
+        //                 for (var i = 0; i < results.length; i++) {
+        //                     var content = '<h3>' + results[i].name + '</h3>' + '<h4>' + results[i].vicinity + '</h4>'
+        //                     var marker = new google.maps.Marker({
+        //                         position: results[i].geometry.location,
+        //                         map: map,
+        //                         tittle: results[i].name
+        //                     });
         
-                            var infoWindow = new google.maps.InfoWindow({
-                                content: content
-                            })
+        //                     var infoWindow = new google.maps.InfoWindow({
+        //                         content: content
+        //                     })
         
-                            marker.setMap(map);
-                            bindInfoWindow(marker, map, infoWindow, content);
+        //                     marker.setMap(map);
+        //                     bindInfoWindow(marker, map, infoWindow, content);
         
         
-                        }
-                    }
-                }
-                function bindInfoWindow(marker, map, infoWindow, html) {
-                    marker.addListener("click", function(){
-                        infoWindow.setContent(html)
-                        infoWindow.open(map, this)
-                    })
-                }
-            initMap()
-        })
+        //                 }
+        //             }
+        //         }
+        //         function bindInfoWindow(marker, map, infoWindow, html) {
+        //             marker.addListener("click", function(){
+        //                 infoWindow.setContent(html)
+        //                 infoWindow.open(map, this)
+        //             })
+        //         }
+        //     initMap()
+        // })
         
 
         console.log(response)
@@ -103,6 +104,11 @@ $(document).ready(function(){
             var info = $("<p>")
             var fees = $("<p>")
             var parkImg = $("<img>")
+
+            const zipcode = response.data[i].addresses[0].postalcode
+            var moreInfoBtn = $("<button>")
+            moreInfoBtn.click(() => handleInfoClick(zipcode))
+
             if (response.data[i].images[0]) {
                 parkImg.attr("src", response.data[i].images[0].url)
                 parkImg.attr("alt", response.data[i].images[0].altText)
@@ -118,10 +124,29 @@ $(document).ready(function(){
                 }
             parkName.text(response.data[i].fullName)
             info.text(response.data[i].description)
-            resultDiv.append(parkName, info, fees, parkImg)
+            resultDiv.append(parkName, info, fees, parkImg, moreInfoBtn)
             $("#result" + i).html(resultDiv)
         }
     })
 })
-   
+
+function zipToGeo(zipcode) {
+    const url = `https://public.opendatasoft.com//api/records/1.0/search/?dataset=us-zip-code-latitude-and-longitude&q=${zipcode}`
+    $.ajax({
+        url,
+        method: "GET"
+    }).then(response => {
+        const latitude = response.records[0].fields.latitude;
+        const longitude = response.records[0].fields.longitude;
+        console.log(latitude, longitude)
+        return {latitude, longitude}
+    })
+}
+
+function handleInfoClick(zipcode) {
+    zipToGeo(zipcode)
+}
+
+
+
 })
