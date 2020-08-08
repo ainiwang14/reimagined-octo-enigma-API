@@ -30,26 +30,30 @@ $(document).ready(function(){
         var map;
         map = new google.maps.Map(document.getElementById("map"), {
             center: new google.maps.LatLng(0,0),
-            zoom: 5
+            zoom: 6
         })
+        var geocodingUrl=[];
+        var names = [];
+        var address = []
         for (var i = 0; i < 3; i++) {
-
-        var name = response.data[i].fullName
-        console.log(name + "1")
-        var content = '<h3>' + name + '</h3>' + '<h4>' + '</h4>'
+        names.push(response.data[i].fullName)
+        address.push(response.data[i].addresses[0].city + " " +  response.data[i].addresses[0].stateCode)
         var city = response.data[i].addresses[0].city
         var state = response.data[i].addresses[0].stateCode
-        var geocodingUrl = "https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "," + state + "&key=AIzaSyCLjaOmTbNl8M0ewJ5amY9cm6rytBGUVZM"
+         geocodingUrl.push("https://maps.googleapis.com/maps/api/geocode/json?address=" +  city + "," + state + "&key=AIzaSyCLjaOmTbNl8M0ewJ5amY9cm6rytBGUVZM")
+        }
         $.ajax({
-            url: geocodingUrl,
+            url: geocodingUrl[0],
             method: "GET"
         }).then(function(addResponse){
+            console.log(addResponse)
             function initMap() {
+                console.log("HELLOE")
                 map.panTo(new google.maps.LatLng(addResponse.results[0].geometry.location.lat,addResponse.results[0].geometry.location.lng))
                 getParks();
                 }
                 function getParks() {
-                    console.log(name + "2")
+                        var content = '<h3>' + names[0] + '</h3>' + '<h4>' + address[0] + '</h4>'
                         var marker = new google.maps.Marker({
                             position: addResponse.results[0].geometry.location,
                             map: map,
@@ -61,7 +65,6 @@ $(document).ready(function(){
                         marker.setMap(map);
                         bindInfoWindow(marker, map, infoWindow, content);
                 }
-
                 function bindInfoWindow(marker, map, infoWindow, html) {
                     marker.addListener("click", function(){
                         infoWindow.setContent(html)
@@ -70,7 +73,60 @@ $(document).ready(function(){
                 }
             initMap()
         })
-    }
+        $.ajax({
+            url: geocodingUrl[1],
+            method: "GET"
+        }).then(function(addResponse){
+            console.log(addResponse)
+          getParks();
+                function getParks() {
+                        var content = '<h3>' + names[1] + '</h3>' + '<h4>' + address[1] + '</h4>'
+                        var marker = new google.maps.Marker({
+                            position: addResponse.results[0].geometry.location,
+                            map: map,
+                            title: addResponse.results[0].name
+                        });
+                        var infoWindow = new google.maps.InfoWindow({
+                            content: content
+                        })
+                        marker.setMap(map);
+                        bindInfoWindow(marker, map, infoWindow, content);
+
+                }
+                function bindInfoWindow(marker, map, infoWindow, html) {
+                    marker.addListener("click", function(){
+                        infoWindow.setContent(html)
+                        infoWindow.open(map, this)
+                    })
+                }
+        })
+        $.ajax({
+            url: geocodingUrl[2],
+            method: "GET"
+        }).then(function(addResponse){
+            console.log(addResponse)
+          getParks();
+                function getParks() {
+                        var content = '<h3>' + names[2] + '</h3>' + '<h4>' + address[2] + '</h4>'
+                        var marker = new google.maps.Marker({
+                            position: addResponse.results[0].geometry.location,
+                            map: map,
+                            title: addResponse.results[0].name
+                        });
+                        var infoWindow = new google.maps.InfoWindow({
+                            content: content
+                        })
+                        marker.setMap(map);
+                        bindInfoWindow(marker, map, infoWindow, content);
+
+                }
+                function bindInfoWindow(marker, map, infoWindow, html) {
+                    marker.addListener("click", function(){
+                        infoWindow.setContent(html)
+                        infoWindow.open(map, this)
+                    })
+                }
+        })
         console.log(response)
         for (var i = 0; i < 4; i++) {
             var resultDiv = $("<div>")
