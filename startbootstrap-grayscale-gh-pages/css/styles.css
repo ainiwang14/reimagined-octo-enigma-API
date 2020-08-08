@@ -1,11 +1,36 @@
 @charset "UTF-8";
+/*!
+* Start Bootstrap - Grayscale v6.0.2 (https://startbootstrap.com/themes/grayscale)
+* Copyright 2013-2020 Start Bootstrap
+* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-grayscale/blob/master/LICENSE)
+*/
+/*!
+ * Bootstrap v4.5.0 (https://getbootstrap.com/)
+ * Copyright 2011-2020 The Bootstrap Authors
+ * Copyright 2011-2020 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+
+
+ 
 .bold {
+<<<<<<< HEAD
 color: white;
 }
 
 /*/////////// TIM ABOVE / BLAKE BELOW //////////////*/
 
 
+=======
+  color: #64a19d;
+}
+
+#state-selector {
+  padding-bottom: 400px;
+  padding-top: 200px
+}
+>>>>>>> b2634bbaa10612ca319f59f91f139b14a959b2c7
 .resultBoxes {
 padding-bottom: 233px;
 }
@@ -10255,6 +10280,7 @@ border: 0;
 }
 
 .masthead {
+<<<<<<< HEAD
 position: relative;
 width: 100%;
 height: auto;
@@ -10265,6 +10291,18 @@ background-position: center;
 background-repeat: no-repeat;
 background-attachment: scroll;
 background-size: cover;
+=======
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 35rem;
+  padding: 15rem 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000000 100%), url(../assets/pexels-frankie-thomas-442254.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+>>>>>>> b2634bbaa10612ca319f59f91f139b14a959b2c7
 }
 .masthead h1 {
 font-family: "Varela Round", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
