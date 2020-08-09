@@ -15,14 +15,6 @@
 
  
 .bold {
-<<<<<<< HEAD
-color: white;
-}
-
-/*/////////// TIM ABOVE / BLAKE BELOW //////////////*/
-
-
-=======
   color: #64a19d;
 }
 
@@ -30,10 +22,9 @@ color: white;
   padding-bottom: 400px;
   padding-top: 200px
 }
->>>>>>> b2634bbaa10612ca319f59f91f139b14a959b2c7
-.resultBoxes {
+/* .resultBoxes {
 padding-bottom: 233px;
-}
+} */
 
 .bi-droplet {
 height: 1.5rem;
@@ -57,8 +48,21 @@ float: right;
 height: 1.5rem;
 float: right;
 }
+.infoBtn {
+  float: right; 
+  margin-top: auto;
+  border-radius: 5px;
+}
 
 /*//////////// BLAKEQUAKE-STYLES-ABOVE-THIS ROW ////////////*/
+
+#map {
+  display: none;
+  height: 600px;
+  width: 80%;
+  }
+
+/* ///// OLIVER STYLES ABOVE ///////////// */
 
 /*//////// PRE-MADE BOOSTRAP CONTENT BELOW ////////*/
 :root {
@@ -246,12 +250,6 @@ overflow: auto;
 
 figure {
 margin: 0 0 1rem;
-}
-
-#map {
-display: none;
-height: 600px;
-width: 80%;
 }
 
 img {
