@@ -27,7 +27,7 @@ $(document).ready(function () {
 
         $(".resultBoxes").empty();
 
-        numberOfResults = 8;
+        numberOfResults = 7;
 
         $("html, body").animate(
 
