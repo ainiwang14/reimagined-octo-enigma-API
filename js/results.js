@@ -178,7 +178,7 @@ $(document).ready(function () {
                 var info = $("<p>");
                 var fees = $("<p>");
                 var parkImg = $("<img>");
-                var resultBtn = $("<button>");
+                var resultBtn = $("<a>");
                 var svg = $("<svg>")
                 var path = $("<path>")
 
@@ -195,6 +195,8 @@ $(document).ready(function () {
 
                 resultBtn.text("More Info");
                 resultBtn.attr("class", "infoBtn");
+                resultBtn.attr("class", "btn btn-primary");
+                resultBtn.attr("href", "./display.html?PostalCode=" + response.data[i].addresses[0].postalCode);
 
                 if (stateOnlyData[i].images[0]) {
 
