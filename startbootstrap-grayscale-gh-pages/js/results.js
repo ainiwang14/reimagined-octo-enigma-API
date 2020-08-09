@@ -1,5 +1,8 @@
 $(document).ready(function () {
-  var finalChoicearr = [];
+  const queryString = window.location.search;
+  console.log(queryString);
+  const urlParams = new URLSearchParams(queryString);
+  console.log(urlParams.get("postalCode"));
   $(document).on("click", ".infoBtn", function () {
     console.log("hello");
   });
@@ -144,9 +147,15 @@ $(document).ready(function () {
         var info = $("<p>");
         var fees = $("<p>");
         var parkImg = $("<img>");
-        var resultBtn = $("<button>");
+        var resultBtn = $("<a>");
         resultBtn.text("More Info");
-        resultBtn.attr("class", "infoBtn");
+        resultBtn.attr("class", "btn btn-primary");
+        resultBtn.attr(
+          "href",
+          "https://jdelintt.github.io/Homework2/index.html" +
+            "?PostalCode=" +
+            response.data[i].addresses[0].postalCode
+        );
         if (response.data[i].images[0]) {
           parkImg.attr("src", response.data[i].images[0].url);
           parkImg.attr("alt", response.data[i].images[0].altText);
@@ -162,11 +171,6 @@ $(document).ready(function () {
         resultDiv.append(parkName, info, fees, parkImg, resultBtn);
         $("#result" + i).html(resultDiv);
       }
-    });
-
-    $(document).on("click", ".infoBtn", function () {
-      console.log("I work!");
-      console.log($(this).response.fullName);
     });
   });
 });
