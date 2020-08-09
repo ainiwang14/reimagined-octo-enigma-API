@@ -73,6 +73,11 @@ $(document).ready(function () {
 
                     stateOnlyData.push(response.data[i]);
 
+                }
+                else if (stateCode === "DE") {
+
+                    stateOnlyData.push(response.data[i]);
+
                 };
 
             };
