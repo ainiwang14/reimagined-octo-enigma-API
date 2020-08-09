@@ -13,21 +13,31 @@ $(document).ready(function () {
     
     var numberOfResults = 5;
 
+    var chooseNumberOfResults = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
 
     for (var i = 0; i < stateArray.length; i++) {
 
         var option = $("<option>");
         option.attr('value', stateArray[i].initials);
         option.text(stateArray[i].state);
-        $(".custom-select").append(option);
+        $("#select-a-state").append(option);
 
     };
 
-    $("select").change(function () {
+    for (var i = 0; i < chooseNumberOfResults.length; i++) {
+
+        var option = $("<option>");
+        option.attr('value', chooseNumberOfResults[i]);
+        option.text(chooseNumberOfResults[i]);
+        $("#select-a-number").append(option);
+
+    };
+
+    $("#state-and-number-search-result").on("click", function () {
 
         $(".resultBoxes").empty();
 
-        numberOfResults = 7;
+        $(".resultBoxes").attr("style", "padding-bottom: 0px;");
 
         $("html, body").animate(
 
@@ -41,7 +51,8 @@ $(document).ready(function () {
 
         );
 
-        var stateCode = $(this).val();
+        var stateCode = $("#select-a-state").val();
+        numberOfResults = $("#select-a-number").val();
 
         var npsUrl = "https://cors-anywhere.herokuapp.com/https://developer.nps.gov/api/v1/parks?stateCode=" + stateCode + "&api_key=8TwvOB64CVZ7My6tRYYfqqq4Tz82BObwHj5wzbyX";
 
@@ -59,6 +70,11 @@ $(document).ready(function () {
             for (var i = 0; i < response.data.length; i++) {
 
                 if (response.data[i].states === stateCode) {
+
+                    stateOnlyData.push(response.data[i]);
+
+                }
+                else if (stateCode === "DE") {
 
                     stateOnlyData.push(response.data[i]);
 
