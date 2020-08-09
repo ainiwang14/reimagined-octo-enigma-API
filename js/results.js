@@ -225,6 +225,7 @@ $(document).ready(function () {
           "href",
           "https://ainiwang14.github.io/reimagined-octo-enigma-API/secondpage.html" +
             "?" +
+            "PostalCode=" +
             response.data[i].addresses[0].postalCode
         );
 
