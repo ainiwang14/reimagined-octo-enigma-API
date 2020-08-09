@@ -20,10 +20,8 @@
   var navbarCollapse = function () {
     console.log("navbarCollapse");
     if ($("#mainNav").offset().top > 100) {
-      console.log("true");
       $("#mainNav").addClass("navbar-shrink");
     } else {
-      console.log("false");
       $("#mainNav").removeClass("navbar-shrink");
     }
   };

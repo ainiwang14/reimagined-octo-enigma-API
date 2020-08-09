@@ -223,9 +223,7 @@ $(document).ready(function () {
         resultBtn.attr("class", "btn btn-primary");
         resultBtn.attr(
           "href",
-          "https://ainiwang14.github.io/reimagined-octo-enigma-API/secondpage.html" +
-            "?" +
-            "PostalCode=" +
+          "./display.html?PostalCode=" +
             response.data[i].addresses[0].postalCode
         );
 
