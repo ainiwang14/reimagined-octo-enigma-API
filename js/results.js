@@ -27,8 +27,6 @@ $(document).ready(function () {
 
         $(".resultBoxes").empty();
 
-        numberOfResults = 7;
-
         $("html, body").animate(
 
             {
@@ -41,7 +39,9 @@ $(document).ready(function () {
 
         );
 
-        var stateCode = $(this).val();
+        var stateCode = $(".custom-select").val();
+        
+        numberOfResults = 7;
 
         var npsUrl = "https://cors-anywhere.herokuapp.com/https://developer.nps.gov/api/v1/parks?stateCode=" + stateCode + "&api_key=8TwvOB64CVZ7My6tRYYfqqq4Tz82BObwHj5wzbyX";
 
@@ -59,6 +59,11 @@ $(document).ready(function () {
             for (var i = 0; i < response.data.length; i++) {
 
                 if (response.data[i].states === stateCode) {
+
+                    stateOnlyData.push(response.data[i]);
+
+                }
+                else if (stateCode === "DE") {
 
                     stateOnlyData.push(response.data[i]);
 
