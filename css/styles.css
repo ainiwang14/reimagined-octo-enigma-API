@@ -60,11 +60,11 @@ height: 1.5rem;
 float: right;
 }
 
-.infoBtn {
+#infoBtn {
   /* position: absolute; */
   float: right; 
-  margin-bottom: auto;
-  border-radius: 5px;
+  /* margin-bottom: auto;
+  border-radius: 5px; */
 }
 
 .cutstom-select2 {

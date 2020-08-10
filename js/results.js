@@ -222,7 +222,7 @@ $(document).ready(function () {
         path.attr("fill-rule", "evenodd");
         path.attr("d", icons[1].d);
         resultBtn.text("More Info");
-        resultBtn.attr("class", "infoBtn");
+        resultBtn.attr("id", "infoBtn");
         resultBtn.attr("class", "btn btn-primary");
         resultBtn.attr(
           "href",
