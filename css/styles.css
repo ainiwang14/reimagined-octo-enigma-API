@@ -285,7 +285,7 @@ figure {
 #map {
   display: none;
   height: 600px;
-  width: 80%;
+  width: 100%;
 }
 
 img {
