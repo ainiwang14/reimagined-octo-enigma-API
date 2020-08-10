@@ -126,8 +126,8 @@ $(document).ready(function () {
 
             var parkMap = new google.maps.Map(document.getElementById("map"), {
 
-                center: new google.maps.LatLng(0, 0),
-                zoom: 6,
+                center: new google.maps.LatLng(37.0902, -95.7129),
+                zoom: 4,
 
             });
 
@@ -146,10 +146,11 @@ $(document).ready(function () {
                 names.push(stateOnlyData[i].fullName);
                 address.push(stateOnlyData[i].addresses[0].city + " " + stateOnlyData[i].addresses[0].stateCode);
                 
+                var lineOne = stateOnlyData[i].addresses[0].line1;
                 var city = stateOnlyData[i].addresses[0].city;
-                var state = stateOnlyData[i].addresses[0].stateCode;
                
-                geocodingUrl.push("https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/geocode/json?address=" + city + "," + state + "&key=AIzaSyCLjaOmTbNl8M0ewJ5amY9cm6rytBGUVZM");
+
+                geocodingUrl.push("https://maps.googleapis.com/maps/api/geocode/json?address=" + lineOne + "," + city + "," + stateCode + "&key=AIzaSyCLjaOmTbNl8M0ewJ5amY9cm6rytBGUVZM");
            
             }
 
@@ -179,19 +180,25 @@ $(document).ready(function () {
                             )
                         );
 
+                        parkMap.setZoom(6);
+
                         getParks();
                     }
 
                     function getParks() {
 
                         var basicParkInfo = "<h3>" + name + "</h3>" + "<h4>" + address + "</h4>";
+
+                        if (addResponse.results[0]) {
                         
-                        var parkMarker = new google.maps.Marker({
+                          var parkMarker = new google.maps.Marker({
 
-                            position: addResponse.results[0].geometry.location,
-                            map: parkMap
+                              position: addResponse.results[0].geometry.location,
+                              map: parkMap
 
-                        });
+                          });
+
+                      }
 
                         var parkInfoPopUp = new google.maps.InfoWindow({
 
@@ -238,6 +245,13 @@ $(document).ready(function () {
                     parkImg.attr("src", stateOnlyData[i].images[0].url);
                     parkImg.attr("alt", stateOnlyData[i].images[0].altText);
                     parkImg.attr("style", "height: 150px;  width: 150px;");
+
+                }
+                else {
+
+                  parkImg.attr("src", "https://images.pexels.com/photos/618608/pexels-photo-618608.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+                  parkImg.attr("alt", "Sun behind large rock");
+                  parkImg.attr("style", "height: 150px;  width: 150px;");
 
                 }
 
