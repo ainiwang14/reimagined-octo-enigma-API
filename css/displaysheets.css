@@ -1,4 +1,25 @@
 body {
   background-size: cover;
-  background-image: url("../assets/img/backgroundimage1.jpg");
+  background-image: url("../assets/img/backgroundfordisplay2.jpg");
+}
+
+  
+
+#container-styling {
+  padding-bottom: 75px;
+}
+
+.thirdcolumn {
+  background-color: seashell;
+  opacity: 28%;
+}
+
+.secondcolumn {
+  background-color: seashell;
+  opacity: 50%;
+}
+
+.firstcolumns {
+  background-color: navy;
+  opacity: 50%;
 }
