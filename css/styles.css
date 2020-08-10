@@ -19,6 +19,10 @@
  
 }
 
+#infoBtn {
+  float: right;
+}
+
 #state-and-number-search-result {
   margin-top: 30px;
 }

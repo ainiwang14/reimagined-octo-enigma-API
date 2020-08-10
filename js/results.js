@@ -27,15 +27,15 @@ $(document).ready(function () {
     { initials: "MD", state: "Maryland" },
     { initials: "MA", state: "Massachusetts" },
     { initials: "ME", state: "Maine" },
-    { intials: "MI", state: "Michigan" },
+    { initials: "MI", state: "Michigan" },
     { initials: "MN", state: "Minnesota" },
     { initials: "MS", state: "Mississippi" },
     { initials: "MO", state: "Missouri" },
-    { intials: "MT", state: "Montana" },
+    { initials: "MT", state: "Montana" },
     { initials: "NE", state: "Nebraska" },
     { initials: "NV", state: "Nevada" },
-    { initals: "NH", state: "New Hampshire" },
-    { initals: "NJ", state: "New Jersey" },
+    { initials: "NH", state: "New Hampshire" },
+    { initials: "NJ", state: "New Jersey" },
     { initials: "NM", state: "New Mexico" },
     { initials: "NY", state: "New York" },
     { initials: "NC", state: "North Carolina" },
@@ -222,7 +222,7 @@ $(document).ready(function () {
         path.attr("fill-rule", "evenodd");
         path.attr("d", icons[1].d);
         resultBtn.text("More Info");
-        resultBtn.attr("class", "infoBtn");
+        resultBtn.attr("id", "infoBtn");
         resultBtn.attr("class", "btn btn-primary");
         resultBtn.attr(
           "href",
