@@ -1,5 +1,9 @@
 $(document).ready(function () {
-  var aladin = A.aladin('#aladin-lite-div', {survey: "P/DSS2/color", fov:60});
+  var aladin = A.aladin("#aladin-lite-div", {
+    survey: "P/DSS2/color",
+    fov: 60,
+  });
+
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const zipCode = urlParams.get("PostalCode");
