@@ -22,7 +22,18 @@
 #infoBtn {
   float: right;
 }
-
+.weather-icons {
+  position: relative;
+  left: 83%;
+  height: 11%;
+  width: 11%
+  
+ }
+ #weather {
+  font-size: 40px;;
+  
+ }
+ 
 #state-and-number-search-result {
   margin-top: 30px;
 }
