@@ -100,20 +100,24 @@ $(document).ready(function () {
             var geocodingUrl = [];
             var names = [];
             var address = [];
+            var postCode = [];
+            var parkAbv = [];
             if (stateOnlyData.length < numberOfResults) {
                 numberOfResults = stateOnlyData.length;
             }
             for (var i = 0; i < numberOfResults; i++) {
+                parkAbv.push(stateOnlyData[i].parkCode)
+                postCode.push(stateOnlyData[i].addresses[0].postalCode)
                 names.push(stateOnlyData[i].fullName);
                 address.push(stateOnlyData[i].addresses[0].city + " " + stateOnlyData[i].addresses[0].stateCode);
                 var lineOne = stateOnlyData[i].addresses[0].line1;
                 var city = stateOnlyData[i].addresses[0].city;
                 geocodingUrl.push("https://maps.googleapis.com/maps/api/geocode/json?address=" + lineOne + "," + city + "," + stateCode + "&key=AIzaSyCLjaOmTbNl8M0ewJ5amY9cm6rytBGUVZM");
             }
-            for (var i = 0; i < geocodingUrl.length; i++) {
-                callAjaxMethod(names[i], address[i], geocodingUrl[i]);
+            for (var i = 0; i < numberOfResults; i++) {
+                callAjaxMethod(names[i], address[i], postCode[i], parkAbv[i], geocodingUrl[i]);
             }
-            function callAjaxMethod(name, address, url) {
+            function callAjaxMethod(name, address, postal, parkCode, url) {
                 $.ajax({
                     url: url,
                     method: "GET"
@@ -130,15 +134,15 @@ $(document).ready(function () {
                         getParks();
                     }
                     function getParks() {
-                        var basicParkInfo = "<h5>" + name + "</h5>" + 
-                        "<h6>" + address + "</h6>" + 
-                        "<a href=display.html?PostalCode=" + stateOnlyData[i].addresses[0].postalCode + "&parkCode=" + stateOnlyData[i].parkCode + ">More Info</a>" ;
+                        var basicParkInfo = "<h5>" + name + "</h5>" +
+                            "<h6>" + address + "</h6>" +
+                            "<a href=display.html?PostalCode=" + postal + "&parkCode=" + parkCode + ">More Info</a>";
                         if (addResponse.results[0]) {
-                          var parkMarker = new google.maps.Marker({
-                              position: addResponse.results[0].geometry.location,
-                              map: parkMap
-                          });
-                      }
+                            var parkMarker = new google.maps.Marker({
+                                position: addResponse.results[0].geometry.location,
+                                map: parkMap
+                            });
+                        }
                         var parkInfoPopUp = new google.maps.InfoWindow({
                             content: basicParkInfo
                         });
@@ -171,9 +175,9 @@ $(document).ready(function () {
                     parkImg.attr("style", "height: 150px;  width: 150px;");
                 }
                 else {
-                  parkImg.attr("src", "https://images.pexels.com/photos/618608/pexels-photo-618608.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-                  parkImg.attr("alt", "Sun behind large rock");
-                  parkImg.attr("style", "height: 150px;  width: 150px;");
+                    parkImg.attr("src", "https://images.pexels.com/photos/618608/pexels-photo-618608.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+                    parkImg.attr("alt", "Sun behind large rock");
+                    parkImg.attr("style", "height: 150px;  width: 150px;");
                 }
                 if (stateOnlyData[i].entranceFees[0]) {
                     fees.text("$" + stateOnlyData[i].entranceFees[0].cost);
@@ -184,7 +188,7 @@ $(document).ready(function () {
                 info.text(stateOnlyData[i].description);
                 resultDiv.attr("class", "alert alert-dark");
                 resultDiv.attr("role", "alert");
-                resultDiv.append( parkName, info, fees, parkImg, resultBtn);
+                resultDiv.append(parkName, info, fees, parkImg, resultBtn);
                 resultDiv.prepend(`<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-globe" fill="currentColor"
                 xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd"
