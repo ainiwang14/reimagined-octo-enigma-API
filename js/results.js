@@ -93,7 +93,7 @@ $(document).ready(function () {
             for (var i = 0; i < response.data.length; i++) {
                 if (response.data[i].states === stateCode && response.data[i].addresses[0]) {
                     stateOnlyData.push(response.data[i]);
-                } else if (stateCode === "DE") {
+                } else if (response.data[i].states === "DE,PA") {
                     stateOnlyData.push(response.data[i]);
                 }
             }
