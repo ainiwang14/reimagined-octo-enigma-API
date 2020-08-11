@@ -36,7 +36,7 @@ $(document).ready(function () {
       currentTemp = Math.floor(currentTemp + 32);
       console.log(response.current.weather[0].main);
       $("#weather").html(currentTemp);
-      if (currentTemp < 65) {
+      if (iconWeather === "Clear") {
       var image = $("<img>");
       image.attr("class", "weather-icons");
       image.attr("src", "assets/img/sun-icon.png");
