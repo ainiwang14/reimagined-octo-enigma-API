@@ -34,11 +34,11 @@ $(document).ready(function () {
       currentTemp = currentTemp * (9 / 5);
       currentTemp = Math.floor(currentTemp + 32);
       console.log(currentTemp);
-      $("#weatherbox").html(currentTemp);
+      $("#weather").html(currentTemp);
       // if (currentTemp < 65) {
       var image = $("<img>");
       image.attr("src", "assets/img/sun-icon.png");
-      $("#weatherbox").append(image);
+      $("#weather").append(image);
       // }
     });
   });
