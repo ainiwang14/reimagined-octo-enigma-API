@@ -100,20 +100,24 @@ $(document).ready(function () {
             var geocodingUrl = [];
             var names = [];
             var address = [];
+            var postCode = [];
+            var parkAbv = [];
             if (stateOnlyData.length < numberOfResults) {
                 numberOfResults = stateOnlyData.length;
             }
             for (var i = 0; i < numberOfResults; i++) {
+                parkAbv.push(stateOnlyData[i].parkCode)
+                postCode.push(stateOnlyData[i].addresses[0].postalCode)
                 names.push(stateOnlyData[i].fullName);
                 address.push(stateOnlyData[i].addresses[0].city + " " + stateOnlyData[i].addresses[0].stateCode);
                 var lineOne = stateOnlyData[i].addresses[0].line1;
                 var city = stateOnlyData[i].addresses[0].city;
                 geocodingUrl.push("https://maps.googleapis.com/maps/api/geocode/json?address=" + lineOne + "," + city + "," + stateCode + "&key=AIzaSyCLjaOmTbNl8M0ewJ5amY9cm6rytBGUVZM");
             }
-            for (var i = 0; i < geocodingUrl.length; i++) {
-                callAjaxMethod(names[i], address[i], geocodingUrl[i]);
+            for (var i = 0; i < numberOfResults; i++) {
+                callAjaxMethod(names[i], address[i], postCode[i], parkAbv[i], geocodingUrl[i]);
             }
-            function callAjaxMethod(name, address, url) {
+            function callAjaxMethod(name, address, postal, parkCode, url) {
                 $.ajax({
                     url: url,
                     method: "GET"
@@ -132,7 +136,7 @@ $(document).ready(function () {
                     function getParks() {
                         var basicParkInfo = "<h5>" + name + "</h5>" + 
                         "<h6>" + address + "</h6>" + 
-                        "<a href=display.html?PostalCode=" + stateOnlyData[i].addresses[0].postalCode + "&parkCode=" + stateOnlyData[i].parkCode + ">More Info</a>" ;
+                        "<a href=display.html?PostalCode=" + postal + "&parkCode=" + parkCode + ">More Info</a>" ;
                         if (addResponse.results[0]) {
                           var parkMarker = new google.maps.Marker({
                               position: addResponse.results[0].geometry.location,
