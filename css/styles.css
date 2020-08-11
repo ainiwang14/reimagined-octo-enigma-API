@@ -20,8 +20,9 @@
 }
 
 #result-amount {
+  float: right;
   position: relative;
-  left: 60%;
+  bottom: 23px;
 }
 
 .load {

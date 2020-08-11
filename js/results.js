@@ -53,19 +53,19 @@ $(document).ready(function () {
         { initials: "WY", state: "Wyoming" },
     ];
     var numberOfResults = 5;
-    var chooseNumberOfResults = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
+    // var chooseNumberOfResults = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];
     for (var i = 0; i < stateArray.length; i++) {
         var option = $("<option>");
         option.attr("value", stateArray[i].initials);
         option.text(stateArray[i].state);
         $("#select-a-state").append(option);
     }
-    for (var i = 0; i < chooseNumberOfResults.length; i++) {
-        var option = $("<option>");
-        option.attr("value", chooseNumberOfResults[i]);
-        option.text(chooseNumberOfResults[i]);
-        $("#select-a-number").append(option);
-    }
+    // for (var i = 0; i < chooseNumberOfResults.length; i++) {
+    //     var option = $("<option>");
+    //     option.attr("value", chooseNumberOfResults[i]);
+    //     option.text(chooseNumberOfResults[i]);
+    //     $("#select-a-number").append(option);
+    // }
     $("#state-and-number-search-result").on("click", function () {
         $("#result-amount").empty();
         $(".resultBoxes").empty();
