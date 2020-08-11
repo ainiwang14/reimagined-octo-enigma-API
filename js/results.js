@@ -67,6 +67,7 @@ $(document).ready(function () {
         $("#select-a-number").append(option);
     }
     $("#state-and-number-search-result").on("click", function () {
+        $("#result-amount").empty();
         $(".resultBoxes").empty();
         $("#map").empty();
         $(".load").attr("style", "display: block;")
@@ -78,12 +79,13 @@ $(document).ready(function () {
             "easeInOutExpo"
         );
         var stateCode = $("#select-a-state").val();
-        numberOfResults = $("#select-a-number").val();
+        // numberOfResults = $("#select-a-number").val();
         var npsUrl = "https://developer.nps.gov/api/v1/parks?stateCode=" + stateCode + "&api_key=8TwvOB64CVZ7My6tRYYfqqq4Tz82BObwHj5wzbyX";
         $.ajax({
             url: npsUrl,
             method: "GET",
         }).then(function (response) {
+            $("#result-amount").empty();
             $(".resultBoxes").empty();
             $("#map").empty();
             $(".load").attr("style", "display: none;")
@@ -107,9 +109,10 @@ $(document).ready(function () {
             var address = [];
             var postCode = [];
             var parkAbv = [];
-            if (stateOnlyData.length < numberOfResults) {
+            // if (stateOnlyData.length < numberOfResults) {
                 numberOfResults = stateOnlyData.length;
-            }
+                $("#result-amount").append(numberOfResults + " results")
+            // }
             for (var i = 0; i < numberOfResults; i++) {
                 parkAbv.push(stateOnlyData[i].parkCode)
                 postCode.push(stateOnlyData[i].addresses[0].postalCode)

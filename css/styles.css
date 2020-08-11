@@ -19,6 +19,11 @@
  
 }
 
+#result-amount {
+  position: relative;
+  left: 60%;
+}
+
 .load {
   display: none;
 }
