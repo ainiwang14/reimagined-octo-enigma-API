@@ -67,6 +67,8 @@ $(document).ready(function () {
         $("#select-a-number").append(option);
     }
     $("#state-and-number-search-result").on("click", function () {
+        $(".resultBoxes").empty();
+        $("#map").empty();
         $(".load").attr("style", "display: block;")
         $("html, body").animate(
             {
@@ -82,8 +84,9 @@ $(document).ready(function () {
             url: npsUrl,
             method: "GET",
         }).then(function (response) {
-            $(".load").attr("style", "display: none;")
             $(".resultBoxes").empty();
+            $("#map").empty();
+            $(".load").attr("style", "display: none;")
             $(".resultBoxes").attr("style", "padding-bottom: 0px;");
             console.log(response);
             var stateOnlyData = [];
