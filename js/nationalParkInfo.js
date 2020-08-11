@@ -3,16 +3,16 @@ $(document).ready(function () {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const parkCode = urlParams.get("parkCode");
-  
+
     var parkCodeUrl = "https://developer.nps.gov/api/v1/parks?parkCode=" + parkCode + "&api_key=8TwvOB64CVZ7My6tRYYfqqq4Tz82BObwHj5wzbyX"
-  
+
     $.ajax({
-  
-      url: parkCodeUrl,
-      method: "GET"
-  
+
+    url: parkCodeUrl,
+    method: "GET"
+
     }).then(function(response){
-  
+
         console.log(response)
 
         var parkName = $("<p>")
@@ -66,8 +66,7 @@ $(document).ready(function () {
         $(".park-name").append(parkName)
         $("#activities").append(activitiesP)
 
-  
+
     })
-  
-  });
-  
+
+});
