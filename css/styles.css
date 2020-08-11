@@ -10330,6 +10330,18 @@ background-size: cover;
   height: auto;
   min-height: 35rem;
   padding: 15rem 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000000 100%), url(../assets/pexels-frankie-thomas-442254.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+.background2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  min-height: 35rem;
+  padding: 15rem 0;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 75%, #000000 100%), url(../assets/img/backgroundfordisplay2.jpg);
   background-position: center;
   background-repeat: no-repeat;
