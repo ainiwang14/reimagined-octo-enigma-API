@@ -7,6 +7,18 @@ body {
 
 #container-styling {
   padding-bottom: 75px;
+  padding-top:30px;
+  background-color: transparent;
+}
+
+#weatherbox {
+
+  height: 50px;
+  width: 100px;
+  margin-bottom: 30px;
+  margin-top: 20px;
+  padding-left: 35px;
+  padding-right: 35px;
 }
 
 .thirdcolumn {
@@ -24,7 +36,13 @@ body {
  
 }
 
+#thirdCol {
+  padding: none;
+  background-color: rgba(255, 245, 238, .5);
+}
+
 #aladin-lite-div {
   padding-top: 0px;
+  position: absolute;
 
 }
