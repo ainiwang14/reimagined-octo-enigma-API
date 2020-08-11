@@ -130,7 +130,9 @@ $(document).ready(function () {
                         getParks();
                     }
                     function getParks() {
-                        var basicParkInfo = "<h3>" + name + "</h3>" + "<h4>" + address + "</h4>";
+                        var basicParkInfo = "<h5>" + name + "</h5>" + 
+                        "<h6>" + address + "</h6>" + 
+                        "<a href=display.html?PostalCode=" + stateOnlyData[i].addresses[0].postalCode + "&parkCode=" + stateOnlyData[i].parkCode + ">More Info</a>" ;
                         if (addResponse.results[0]) {
                           var parkMarker = new google.maps.Marker({
                               position: addResponse.results[0].geometry.location,
