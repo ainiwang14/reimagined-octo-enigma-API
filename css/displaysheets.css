@@ -12,7 +12,6 @@ body {
 }
 
 #weatherbox {
-
   height: 50px;
   width: 100px;
   margin-bottom: 30px;
@@ -36,13 +35,42 @@ body {
  
 }
 
+#firstCol {
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+#secondCol {
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
 #thirdCol {
-  padding: none;
-  background-color: rgba(255, 245, 238, .5);
+  padding: 0px !important;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 
 #aladin-lite-div {
   padding-top: 0px;
   position: absolute;
+  width: 285px;
+  height: 600px;
+}
+
+/* phone */
+@media only screen and (min-device-width : 320px) and (max-device-width : 768px) {
+  #aladin-lite-div {
+    width: 220px;
+    height: 450px;
+}
+
+/* tablet */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1224px) {
+
+}
+
+/* desktop */
+@media only screen  and (min-width : 1224px) {
 
 }
