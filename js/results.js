@@ -67,6 +67,7 @@ $(document).ready(function () {
         $("#select-a-number").append(option);
     }
     $("#state-and-number-search-result").on("click", function () {
+        $(".load").attr("style", "display: block;")
         $("html, body").animate(
             {
                 scrollTop: $("#state-parks").offset().top,
@@ -81,6 +82,7 @@ $(document).ready(function () {
             url: npsUrl,
             method: "GET",
         }).then(function (response) {
+            $(".load").attr("style", "display: none;")
             $(".resultBoxes").empty();
             $(".resultBoxes").attr("style", "padding-bottom: 0px;");
             console.log(response);
