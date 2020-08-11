@@ -35,7 +35,7 @@ $(document).ready(function () {
       currentTemp = currentTemp * (9 / 5);
       currentTemp = Math.floor(currentTemp + 32);
       console.log(response.current.weather[0].main);
-      $("#weather").html(currentTemp);
+      $("#weather").html(currentTemp+"&deg; F");      
       if (iconWeather === "Clear") {
       var image = $("<img>");
       image.attr("class", "weather-icons");
